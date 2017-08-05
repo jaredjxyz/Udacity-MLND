@@ -12124,12 +12124,11 @@ div#notebook {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
-<p>Index 0 is high on fresh goods and milk and low on frozen goods.
-This would be good for an organic market like Whole Foods or Sprouts</p>
-<p>Index 1 is high on milk and grocery, but relatively even across.
-This would be good for a grocery store.</p>
-<p>Index 2 is very high on delicatessen.
-This might be good for a meat markey or sandwich shop.</p>
+<p>Index 0 is really high on milk consumption compared to the average, but much lower on frozen goods, and pretty close to average for everything else.
+This might describe a restaurant that makes its own ice cream: It doesn't need to buy frozen goods because it makes its own.</p>
+<p>Index 1 is low on fresh, but high on milk and frozen compared to the average customer.
+This would be good for a grocery for a bulk supply store where people are buying a lot of food, so they don't buy as much fresh stuff but buy a lot of frozen goods.</p>
+<p>Index 2 is low on fresh, high on milk, and low on delicatessen. This also might be for an ice cream shop, because they wouldn't need anything fresh except for milk.</p>
 
 </div>
 </div>
@@ -13683,7 +13682,10 @@ iIA5TIZhGIZhGIZhGBEwh8kwDMMwDMMwDCMC5jAZhmEYhmEYhmFEwBwmwzAMwzAMwzCMCPw/mP3G
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
-<p>Detergents_paper and pretty much every other feature have some notable amount of correlation. In addition, grocery and milk have a relatively high correlation, as does pretty much everything and delicatessen.</p>
+<p>There seems to be a high correlation between detergents_paper and pretty much every other category.</p>
+<p>You can also see a trend between grocery and milk, which makes sense because anyone buying groceries is going to buy milk at the same time.</p>
+<p>This confirms my suspicion that detergents_paper is easily predictable, and goes well with the f1 score I gto for that category.</p>
+<p>The data for detergents_paper is heavily skewed toward the ~100 item mark in most circumstances.</p>
 
 </div>
 </div>
@@ -17971,10 +17973,10 @@ wQAAAABJRU5ErkJggg==
 <p><strong>Answer:</strong></p>
 <p>70.68% of the variance is explained by the first two principal components</p>
 <p>93.11% of the variance is explained by the first four principal components.</p>
-<p>The first dimension represents the fact that as detergents_paper goes up, grocery and milk each go up about half as much.</p>
-<p>The second dimension says that fresh, frozen, and delicatessen all rise approximately the same</p>
-<p>The third dimension expresses how fresh goes way down as delicatessen goes up</p>
-<p>The fourth dimension expresses how delicatessen goes way down as frozen goes up.</p>
+<p>The first dimension gives a high weight to detergents/paper, and half of that to grocery and frozen, while giving the others very little. This may separate out small markets where one gets milk and groceries but wouldn't nevessarily be getting the big frozen or gresh groceries.</p>
+<p>The second dimension gives a high weight to fresh, frozen, and delicatessen. This would separate out the high-end markets where people buy lots of fresh food &amp; meat along with pre-prepared frozen meals.</p>
+<p>The third dimension expresses places whose fresh and delicatessen purchases differ by a lot. This might include a meat market like a carniceria</p>
+<p>The fourth dimension separates frozen and delicatessen. This might represent a place with a lot of fresh goods like a farmer's market.</p>
 
 </div>
 </div>
@@ -18233,7 +18235,7 @@ wQAAAABJRU5ErkJggg==
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x10cd99b90&gt;</pre>
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x10b78f450&gt;</pre>
 </div>
 
 </div>
@@ -19361,8 +19363,9 @@ AACA1AgmAQAAAACp/f/usk/l66aYHQAAAABJRU5ErkJggg==
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
-<p>K-Means is easy to interpret, and quick to run.</p>
-<p>Gaussian Mixture models don't assume the cluster is circular or spherical like K-Means does, so can give more complex shapes.</p>
+<p>K-Means is easy to interpret, and quick to run. It gives a hard boundary between two spaces by asking which mean point the point it's predicting is closest to.</p>
+<p>Gaussian Mixture models don't assume the cluster is circular or spherical like K-Means does, so can give more complex shapes. It takes into account not only which mean it's closest to but how close it is to that mean compared to other means.</p>
+<p>I decided to go with K Means because of its ease of interpretation, as we're trying to learn to visualize the data in this lesson.</p>
 
 </div>
 </div>
@@ -19430,11 +19433,11 @@ AACA1AgmAQAAAACp/f/usk/l66aYHQAAAABJRU5ErkJggg==
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>3 clusters:  0.39689092645
-4 clusters:  0.331105578718
-8 clusters:  0.364054974884
-10 clusters:  0.361414775407
-15 clusters:  0.360405075964
+<pre>3 clusters:  0.397423420008
+4 clusters:  0.331352273121
+8 clusters:  0.362583266069
+10 clusters:  0.348911840113
+15 clusters:  0.3627152992
 2 clusters:  0.426281015469
 </pre>
 </div>
@@ -20369,8 +20372,8 @@ ABgNAQgAABgNAQgAABgNAQgAABgNAQgAABgNAQgAABiN/wff9nHgUvgG5gAAAABJRU5ErkJggg==
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
-<p>Segment 0 has a lot of fresh and frozen foods. They could represent a smoothie shop, which would be buying a lot of fresh and frozen fruits and veggies.</p>
-<p>Segment 1 has a lot of milk, groceries, and detergents/paper. This sounds like what a household goes through, and so this could be for a local market where people buy bulk items</p>
+<p>Compared to the median for the dataset, Segment 0 has a low amount of fresh, frozen and deli. This could represent a local market where people mostly but their milk and cleaning supplies.</p>
+<p>Compared to the median for the dataset, Segment 1 has a low amount of milk, grocery, and deli. This represents all of the places that segment 0 doesn't describe.</p>
 
 </div>
 </div>
@@ -20425,7 +20428,7 @@ Sample point 2 predicted to be in Cluster 0
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
-<p>All 3 are predicted to be in cluster 1.</p>
+<p>All 3 are predicted to be in cluster 1. This is not what I would expect based off of the predictions I gave at the beginnig for what segment I thought the point would be in, although it's not surprising because trying to fit those data points into a segment was not clear-cut and they could have been a part of a lot of different segments.</p>
 
 </div>
 </div>
@@ -20462,7 +20465,9 @@ Sample point 2 predicted to be in Cluster 0
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
-<p>We can run the tests with half of the A group in segment 0 and half of A group in segment 1 (with everyone else in segment B). If we see that sales have increased in one group, we can then give the new, more frequent delivery to the new group.</p>
+<p>We can take a small, representative sample from each sector, then split each of those two small groups into A and B groups (for a total of 4 groups).</p>
+<p>We give each A group delivery 3 times a week and give each B group delivery 5 times a week as a control group.</p>
+<p>We then check to see if, in each segment, the group with delivery 3 times a week reacts positively (by sales or by customer feedback). If the A group in a segment reacts better than the B group in a segment, we can then give that segment the 3-times-per-week delivery.</p>
 
 </div>
 </div>
