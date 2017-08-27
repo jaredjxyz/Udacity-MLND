@@ -42,9 +42,12 @@ class LearningAgent(Agent):
             self.epsilon = 0
             self.alpha = 0
         else:
-            self.epsilon -= .05
-            a = .9
+            #self.epsilon -= .05
+            a = .025
             #self.epsilon = a**self.trial
+            #self.epsilon = 1./(self.trial+1)**2
+            #self.epsilon = math.e**(-a*self.trial)
+            self.epsilon = math.cos(a*self.trial)
 
         self.trial += 1
 
@@ -175,7 +178,7 @@ def run():
     #   display      - set to False to disable the GUI if PyGame is enabled
     #   log_metrics  - set to True to log trial and simulation results to /logs
     #   optimized    - set to True to change the default log file name
-    sim = Simulator(env, update_delay=0, log_metrics=True, optimized=False)
+    sim = Simulator(env, update_delay=0, log_metrics=True, optimized=True)
 
     ##############
     # Run the simulator
