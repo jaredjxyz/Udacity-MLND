@@ -116,7 +116,9 @@ class LearningAgent(Agent):
         # Be sure that when choosing an action with highest Q-value that you randomly select between actions that "tie".
         if self.learning:
             if random.random() > self.epsilon:
-                action = max((action for action in self.valid_actions), key=lambda action: self.Q[state][action])
+                # Max will always choose the first action. Randomize actions so that that doesn't happen
+                random_actions_list = np.random.permutation(self.valid_actions)
+                action = max((action for action in random_actions_list), key=lambda action: self.Q[state][action])
 
         return action
 
@@ -128,7 +130,8 @@ class LearningAgent(Agent):
         # When learning, implement the value iteration update rule
         #   Use only the learning rate 'alpha' (do not use the discount factor 'gamma')
 
-        self.Q[state][action] = (1-self.alpha) * self.Q[state][action] + self.alpha * reward
+        if self.learning:
+            self.Q[state][action] = (1-self.alpha) * self.Q[state][action] + self.alpha * reward
         return
 
     def update(self):
